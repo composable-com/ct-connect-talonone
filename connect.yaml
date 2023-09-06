@@ -1,0 +1,23 @@
+deployAs:
+  - name: talonone-service 
+    applicationType: service
+    endpoint: /
+    configuration:
+      standardConfiguration:
+        - key: COMMERCETOOLS_AUTH_URL
+          description: commercetools Composable Commerce Auth URL
+        - key: COMMERCETOOLS_HOST
+          description: commercetools Composable Commerce host
+      securedConfiguration:
+        - key: TALON_ONE_API
+          description: Talon.One API keys and API URLs in JSON format
+        - key: CT_TAX_CATEGORY_ID
+          description: commercetools Composable Commerce tax category ID
+        - key: CURRENCY_CODE
+          description: commercetools Composable Commerce currency code
+        - key: COMMERCETOOLS_PROJECT_KEY
+          description: commercetools Composable Commerce project key
+        - key: COMMERCETOOLS_CLIENT_ID
+          description: commercetools Composable Commerce client ID
+        - key: COMMERCETOOLS_CLIENT_SECRET
+          description: commercetools Composable Commerce client secret
