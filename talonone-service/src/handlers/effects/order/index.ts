@@ -1,7 +1,6 @@
 import addLoyaltyPointsHandler from './addLoyaltyPoints'
 import rollbackAddedLoyaltyPointsHandler from './rollbackAddedLoyaltyPoints'
 
-
 export const getOrderEffectHandlers = () => {
   return {
     addLoyaltyPoints: addLoyaltyPointsHandler,

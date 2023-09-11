@@ -4,7 +4,7 @@ import httpErrors, {
   NamedConstructors
 } from 'http-errors'
 
-import { Log } from 'utils'
+import { Log } from '../utils'
 import { GE } from './utils'
 
 type FilterNumberKeys<T> = {

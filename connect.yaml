@@ -2,22 +2,23 @@ deployAs:
   - name: talonone-service 
     applicationType: service
     endpoint: /
+    scripts:
+      postDeploy: npm install && npm run build && npm run connector:post-deploy
+      preUndeploy: npm install && npm run build && npm run connector:pre-undeploy
     configuration:
       standardConfiguration:
-        - key: COMMERCETOOLS_AUTH_URL
-          description: commercetools Composable Commerce Auth URL
-        - key: COMMERCETOOLS_HOST
-          description: commercetools Composable Commerce host
+        - key: CTP_REGION
+          description: commercetools Composable Commerce API region
       securedConfiguration:
         - key: TALON_ONE_API
           description: Talon.One API keys and API URLs in JSON format
-        - key: CT_TAX_CATEGORY_ID
+        - key: CTP_TAX_CATEGORY_ID
           description: commercetools Composable Commerce tax category ID
-        - key: CURRENCY_CODE
-          description: commercetools Composable Commerce currency code
-        - key: COMMERCETOOLS_PROJECT_KEY
+        - key: CTP_PROJECT_KEY
           description: commercetools Composable Commerce project key
-        - key: COMMERCETOOLS_CLIENT_ID
+        - key: CTP_CLIENT_ID
           description: commercetools Composable Commerce client ID
-        - key: COMMERCETOOLS_CLIENT_SECRET
+        - key: CTP_CLIENT_SECRET
           description: commercetools Composable Commerce client secret
+        - key: CTP_SCOPE
+          description: commercetools Composable Commerce scope

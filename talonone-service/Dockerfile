@@ -6,6 +6,6 @@ WORKDIR /app
 
 COPY . ./
 
-RUN pnpm i
+RUN npm i
 
-CMD [ "pnpm", "start" ]
+CMD [ "npm", "start:dev" ]

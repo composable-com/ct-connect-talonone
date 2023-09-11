@@ -1,5 +1,4 @@
-import { Application, Response, Request, Router, NextFunction } from 'express'
-import swaggerUi from 'swagger-ui-express'
+import { Application, Response, Request, NextFunction } from 'express'
 import httpErrors from 'http-errors'
 
 import { response } from './response'

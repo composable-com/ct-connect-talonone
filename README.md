@@ -1,10 +1,10 @@
-# commercetools API Extension: TalonOne Integration
+# commercetools API Extension: Talon.One Integration
 
-This commercetools API Extension integrates TalonOne, providing support for both Loyalty Points and Cart-Level Discounts. The following README provides detailed instructions on how to install, configure, and verify the integration of this open-source project.
+This commercetools API Extension integrates Talon.One, providing support for both Loyalty Points and Cart-Level Discounts. The following README provides detailed instructions on how to install, configure, and verify the integration of this open-source project.
 
 ## Current State
 
-This solution currently supports managing of commercetools cart discounts and customer loyalty points through Talon.One. Enhancements and updates are continually made to improve the functionality and usability of the extension. _Have in mind that a Customer Session is for TalonOne what is a Cart for commercetools._
+This solution currently supports managing of commercetools cart discounts and customer loyalty points through Talon.One. Enhancements and updates are continually made to improve the functionality and usability of the extension. _Have in mind that a Customer Session is for Talon.One what is a Cart for commercetools._
 
 ## Prerequisites
 
@@ -21,12 +21,12 @@ Before installing this commercetools API Extension, ensure that you have the fol
 
 These are the steps to install the commercetools API Extension:
 
-1. **Install Dependencies:** Install the dependencies by running `pnpm install` in the root directory.
+1. **Install Dependencies:** Install the dependencies by running `npm install` in the root directory.
 2. **Create commercetools API client keys:** Ensure that you create the API client keys with the correct scope (**_manage_project_**).
-3. **Create TalonOne API Credentials:** Create the API credentials for your Talon.One account. You can find this in the Talon.One dashboard under (**_Settings > Developer_**).
+3. **Create Talon.One API Credentials:** Create the API credentials for your Talon.One account. You can find this in the Talon.One dashboard under (**_Settings > Developer_**).
 4. **Get Tax Category ID:** Get the Tax Category ID for the project. You can find this in the commercetools dashboard under (**_Settings > Project Settings > Taxes_**).
 5. **Create .env file:** Create a .env file in the root directory and fill in the required environment variables. See the sample .env.example file for reference.
-Note: the TalonOne API has to be set this way (a valid JSON), this is to support multiple currencies, you can add as many currencies as you want, just add the currency code as a key and the API KEY and API URL as values (check *Setup TalonOne*):
+Note: the Talon.One API has to be set this way (a valid JSON), this is to support multiple currencies, you can add as many currencies as you want, just add the currency code as a key and the API KEY and API URL as values (check *Setup Talon.One*):
 
 ```json
 {
@@ -44,7 +44,12 @@ Note: the TalonOne API has to be set this way (a valid JSON), this is to support
 
 
 
-5. **Run the setup script:** Use the script provided to create the commercetools custom fields and configure the extension. `pnpm run create-ct-types`
+5. **Run the setup script:** Use the script provided to create the commercetools custom fields and configure the extension. 
+
+```bash
+npm run connector:pre-undeploy
+npm run connector:post-deploy
+```
 
 ## Setup Talon.One
   1. [Create the Application](https://docs.talon.one/docs/product/applications/creating-applications), you can only set one currency per application, so if you want to use multiple currencies you will need to create multiple applications. (each application will have its own API key) 
@@ -63,7 +68,7 @@ Note: the TalonOne API has to be set this way (a valid JSON), this is to support
 To set up local development, follow these steps:
 
 1.**Configure ngrok:** Install and configure [ngrok](https://ngrok.com/) to allow the API Extension to call your local machine's express application.
-2. **Start the express server:** Start the express server by running `cd talonone-service && pnpm run start`.
+2. **Start the express server:** Start the express server by running `cd talonone-service && npm run start:dev`.
 3. **Setup commercetools API Extension:** Use the below JSON body to setup the commercetools API Extension with the correct triggers. The `destination.url` should be the ngrok domain you're currently using on your local machine.
 ```json
 {

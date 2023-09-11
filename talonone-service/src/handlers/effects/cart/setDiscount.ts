@@ -1,5 +1,6 @@
 import { Cart, CustomLineItem } from '@commercetools/platform-sdk'
-import { nameToSlug } from 'utils/index'
+import { nameToSlug } from '../../../utils'
+
 
 export interface SetDiscountParams {
   name: string

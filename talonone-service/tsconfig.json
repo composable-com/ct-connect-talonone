@@ -1,18 +1,10 @@
 {
+  "extends": "@tsconfig/recommended/tsconfig.json",
+  "exclude": ["node_modules", "**/*.spec.ts"],
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext",
-    "rootDir": "src"
-  },
-  "extends": "./tsconfig.base.json",
-  "exclude": [
-    "node_modules",
-    "test",
-    "tests",
-    "__test__",
-    "dist"
-  ],
-  "include": [
-    "src"
-  ]
+    "resolveJsonModule": true,
+    "outDir": "./build",
+    "rootDir": "./src",
+    "inlineSourceMap": true
+  }
 }

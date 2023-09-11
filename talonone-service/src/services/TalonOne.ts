@@ -19,9 +19,15 @@ interface TalonOneEnvConfig {
 }
 
 export interface TalonOneUtils {
-  updateCustomerProfile: (id: string, payload: NewCustomerProfile) => Promise<any>;
-  updateCustomerProfiles: (payload: any) => Promise<any>;
-  updateCustomerSession: (id: string, payload: Partial<NewCustomerSessionV2>) => Promise<any>;
+  updateCustomerProfile: (
+    id: string,
+    payload: NewCustomerProfile
+  ) => Promise<any>
+  updateCustomerProfiles: (payload: any) => Promise<any>
+  updateCustomerSession: (
+    id: string,
+    payload: Partial<NewCustomerSessionV2>
+  ) => Promise<any>
 }
 
 export const getTalonOneApiClient = ({
@@ -39,15 +45,18 @@ export const getTalonOneApiClient = ({
   return new IntegrationApi(apiClient)
 }
 
-export const getTalonOneUtils = (currencyCode: string): TalonOneUtils | null => {
+export const getTalonOneUtils = (
+  currencyCode: string
+): TalonOneUtils | null => {
   if (!process.env.TALON_ONE_API) return null
-  const TALON_API = JSON.parse(process.env.TALON_ONE_API) as TalonOneEnvConfig;
+  const TALON_API = JSON.parse(process.env.TALON_ONE_API) as TalonOneEnvConfig
 
   if (
-    !TALON_API[currencyCode] || 
+    !TALON_API[currencyCode] ||
     !TALON_API[currencyCode].API_KEY ||
     !TALON_API[currencyCode].API_URL
-  ) return null
+  )
+    return null
 
   const client = getTalonOneApiClient({
     apiKey: TALON_API[currencyCode].API_KEY,

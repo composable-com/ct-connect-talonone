@@ -13,7 +13,10 @@ export const getCartActions = (
     .map(effect => {
       const { effectType, props } = effect
 
-      if (handlers[effectType]) return handlers[effectType]?.({ ...props, cart })
+      if (handlers[effectType])
+        return handlers[effectType]?.({ ...props, cart })
+
+      return null
     })
     .filter(action => action)
 
@@ -36,12 +39,13 @@ export const getOrderActions = async (
 
       if (handlers[effectType]) {
         const result = await handlers[effectType]?.({ ...props, order })
+
         return result
       }
     })
     .filter(action => action)
 
-  const result = await Promise.allSettled(actions);
+  const result = await Promise.allSettled(actions)
 
   return result
     .filter(action => action.status === 'fulfilled')
