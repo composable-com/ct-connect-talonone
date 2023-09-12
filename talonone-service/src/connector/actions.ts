@@ -42,10 +42,8 @@ export async function createMyExtension(
           url: applicationUrl
         },
         triggers: [
-          {
-            resourceTypeId: 'cart',
-            actions: ['Update']
-          }
+          { "resourceTypeId": "cart", "actions": ["Create", "Update"] },
+          { "resourceTypeId": "order", "actions": ["Create", "Update"] },
         ]
       }
     })
