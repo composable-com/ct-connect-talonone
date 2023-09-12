@@ -90,23 +90,13 @@ export async function createType(
     .types()
     .get({
       queryArgs: {
-        where: `key = "${key}"`
+        where: `key = "${key}"`, 
       }
     })
     .execute()
 
   if (types.length > 0) {
-    const type = types[0]
-
-    await apiRoot
-      .types()
-      .withKey({ key })
-      .delete({
-        queryArgs: {
-          version: type.version
-        }
-      })
-      .execute()
+    return;
   }
 
   await apiRoot

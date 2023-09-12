@@ -16,7 +16,7 @@ import { logger } from '../services/utils/logger'
 import { getProject } from '../services/commercetools/client/create.client'
 
 const d = debug('App:Network:Server')
-const PORT = (process.env.PORT as string) || 5000
+const PORT = (process.env.PORT as string) || 8080
 
 declare global {
   namespace Express {

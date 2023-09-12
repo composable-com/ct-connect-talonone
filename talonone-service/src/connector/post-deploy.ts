@@ -33,6 +33,7 @@ async function run(): Promise<void> {
     await postDeploy(properties)
   } catch (error) {
     process.stderr.write(`Post-deploy failed: ${error}`)
+    throw error
     process.exitCode = 1
   }
 }
