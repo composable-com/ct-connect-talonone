@@ -48,8 +48,7 @@ export const getTalonOneApiClient = ({
 export const getTalonOneUtils = (
   currencyCode: string
 ): TalonOneUtils | null => {
-  if (!process.env.TALON_ONE_API) return null
-  const TALON_API = JSON.parse(process.env.TALON_ONE_API) as TalonOneEnvConfig
+  const TALON_API = JSON.parse(decodeURIComponent(`"${process.env.TALON_ONE_API}"`)) as TalonOneEnvConfig
 
   if (
     !TALON_API[currencyCode] ||

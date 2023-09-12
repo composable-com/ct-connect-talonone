@@ -41,6 +41,7 @@ Note: the Talon.One API has to be set this way (a valid JSON), this is to suppor
   ...
 }
 ```
+Note: You need to add \ (Backslash) before the quotes since this has to be a valid JSON.
 
 
 
