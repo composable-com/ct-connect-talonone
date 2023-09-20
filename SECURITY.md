@@ -9,7 +9,7 @@ In accordance with posted requirements, the Talon.One connector has undergone th
 While the process certifies the connector, it does not substitute the need to conduct further, ongoing and personalized testing of your holistic product where you utilize this connector.  The nature of vulnerabilities in software is that the security landscape changes all the time and continuous scanning is necessary.  
 
 ## No Liability and Indemnification
-The use of the Talon.One connectors comes with no warranty. It is completely the responsibility of those who download and use the code to take the necessary precautions to utilize the connector in a way that is safe and secure. The code is provided "as is”, without any representations or warranties of any kind, either expressed or implied.
+The use of the Talon.One connector comes with no warranty. It is completely the responsibility of those who download and use the code to take the necessary precautions to utilize the connector in a way that is safe and secure. The code is provided "as is”, without any representations or warranties of any kind, either expressed or implied.
 
 You agree to release, indemnify, and hold Orium and its affiliates and subsidiaries, and their officers, directors, employees and agents, harmless from and against any third party claims, liabilities, damages, losses, and expenses,  Your continued use of the product constitutes your acceptance of these terms.
 
