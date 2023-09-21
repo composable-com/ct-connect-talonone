@@ -1,11 +1,11 @@
 import dotenv from 'dotenv'
-dotenv.config()
 
 import { deleteMyExtension } from './actions'
 import { createApiRoot } from '../services/commercetools/client/create.client'
+dotenv.config()
 
 async function preUndeploy(): Promise<void> {
-  const apiRoot = await createApiRoot()
+  const apiRoot = createApiRoot()
   await deleteMyExtension(apiRoot)
 }
 

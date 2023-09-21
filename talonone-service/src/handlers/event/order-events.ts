@@ -3,7 +3,7 @@ import { NewCustomerSessionV2 } from 'talon_one'
 import { OrderReference } from '@commercetools/platform-sdk'
 import { TalonOneUtils } from '../../services/TalonOne'
 import getOrderEffectHandlers from '../../handlers/effects/order'
-import { getOrderActions } from '../../core'
+import { getOrderActions } from '../actions'
 import { logger } from '../../services/utils/logger'
 
 enum OrderState {
@@ -38,22 +38,24 @@ export const orderEventsHandler = async (
   if (!order) return []
 
   try {
+    const orderState = getState(order?.orderState)
+
     // The session id is suppose to exist since this comes from a cart
     if (order?.cart?.id) {
       const { effects } = await updateCustomerSession(order?.cart?.id, {
-        state: getState(order?.orderState)
+        state: orderState
       })
 
       const handlers = getOrderEffectHandlers()
-      const actions = getOrderActions(order, effects, handlers)
+      const actions = await getOrderActions(order, effects, handlers)
 
       return actions ?? []
     }
   } catch (e) {
-    // In case we try to update a session that is already clased or cancelled
+    // In case we try to update a session that is already closed or cancelled
     // we just ignore the error, this daes not affect the order flow or session
     logger.warn(JSON.stringify(e))
-  }
 
-  return []
+    return []
+  }
 }

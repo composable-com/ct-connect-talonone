@@ -1,8 +1,5 @@
+import { EffectHandlers } from '../types'
 import setDiscountHandler, { SetDiscountParams } from './setDiscount'
-
-export interface EffectHandlers {
-  [key: string]: (params: any) => any
-}
 
 export const getCartEffectHandlers = (
   currencyCode: string,

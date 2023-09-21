@@ -11,6 +11,7 @@ const response = ({
   res: Response
   status: number
 }) => {
+  console.log(status, error, message)
   res.status(status).send({ error, message })
 }
 

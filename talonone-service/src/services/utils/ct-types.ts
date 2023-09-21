@@ -1,9 +1,12 @@
 import { FieldDefinition } from '@commercetools/platform-sdk'
 
+
+const CTP_PRODUCT_LOCALE = process.env.CTP_PRODUCT_LOCALE || 'en-US'
+
 const setDiscountDefinition = {
   name: 'talon_one_line_item_effect',
   label: {
-    'en-US': 'setDiscount'
+    [CTP_PRODUCT_LOCALE]: 'setDiscount'
   },
   required: false,
   type: {
@@ -15,7 +18,7 @@ const setDiscountDefinition = {
 const talonOneCustomerTotalPoints = {
   name: 'talon_one_customer_loyalty_points',
   label: {
-    'en-US': 'TotalPoints'
+    [CTP_PRODUCT_LOCALE]: 'TotalPoints'
   },
   required: false,
   type: {
@@ -26,10 +29,10 @@ const talonOneCustomerTotalPoints = {
 export const customerMetadataType = {
   key: 'talon_one_customer_metadata',
   name: {
-    'en-US': 'Talon One Customer metadata'
+    [CTP_PRODUCT_LOCALE]: 'Talon One Customer metadata'
   },
   description: {
-    'en-US': 'Talon one Customer metadata desc'
+    [CTP_PRODUCT_LOCALE]: 'Talon one Customer metadata desc'
   },
   resourceTypeIds: ['customer'],
   fieldDefinitions: [talonOneCustomerTotalPoints] as FieldDefinition[]
@@ -40,10 +43,10 @@ const lineItemsMetadataFields = [setDiscountDefinition]
 export const lineItemMetadataType = {
   key: 'talon_one_line_item_metadata',
   name: {
-    'en-US': 'Talon One Line Item metadata'
+    [CTP_PRODUCT_LOCALE]: 'Talon One Line Item metadata'
   },
   description: {
-    'en-US': 'Talon one Line Item matadata desc'
+    [CTP_PRODUCT_LOCALE]: 'Talon one Line Item matadata desc'
   },
   resourceTypeIds: ['line-item', 'custom-line-item'],
   fieldDefinitions: lineItemsMetadataFields as FieldDefinition[]

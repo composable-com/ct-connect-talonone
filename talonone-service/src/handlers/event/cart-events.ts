@@ -1,11 +1,13 @@
 import getCartEffectHandlers from '../effects/cart/index'
 import { CTP_TAX_CATEGORY_ID } from '../../env'
-import { getCartActions } from '../../core'
+import { getCartActions } from '../actions'
 import { getDiscountApplied } from '../../handlers/effects/cart/setDiscount'
 
 import { CartReference, LineItem } from '@commercetools/platform-sdk'
 import { TalonOneUtils } from '../../services/TalonOne'
 import { logger } from '../../services/utils/logger'
+
+const CTP_PRODUCT_LOCALE = process.env.CTP_PRODUCT_LOCALE || 'en-US'
 
 export const cartEventsHandler = async (
   talonOneUtils: TalonOneUtils,
@@ -21,7 +23,7 @@ export const cartEventsHandler = async (
       state: 'open',
       profileId: cart?.customerId || cart?.anonymousId,
       cartItems: cart?.lineItems.map((lineItem: LineItem) => ({
-        name: lineItem.name['en-US'], // TODO: handle localization
+        name: lineItem.name[CTP_PRODUCT_LOCALE], // TODO: handle localization
         sku: lineItem.variant.sku,
         quantity: lineItem.quantity,
         price: lineItem.price.value.centAmount

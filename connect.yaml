@@ -7,6 +7,8 @@ deployAs:
       preUndeploy: npm install && npm run build && npm run connector:pre-undeploy
     configuration:
       standardConfiguration:
+        - key: CTP_LOCALE
+          description: commercetools Composable Commerce locale
         - key: CTP_REGION
           description: commercetools Composable Commerce API region
       securedConfiguration:

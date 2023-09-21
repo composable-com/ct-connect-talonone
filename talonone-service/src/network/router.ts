@@ -4,7 +4,6 @@ import httpErrors from 'http-errors'
 import { response } from './response'
 import { Api } from './routes'
 
-const routers = []
 const applyRoutes = (app: Application): void => {
   app.use('/', Api)
 

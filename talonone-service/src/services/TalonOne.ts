@@ -5,6 +5,7 @@ import {
   NewCustomerProfile,
   NewCustomerSessionV2
 } from 'talon_one'
+import { logger } from './utils/logger'
 
 interface GetTalonOneApiClient {
   basePath: string
@@ -48,57 +49,67 @@ export const getTalonOneApiClient = ({
 export const getTalonOneUtils = (
   currencyCode: string
 ): TalonOneUtils | null => {
-  const TALON_API = JSON.parse(decodeURIComponent(`"${process.env.TALON_ONE_API}"`)) as TalonOneEnvConfig
+  if (!process.env.TALON_ONE_API) return null
 
-  if (
-    !TALON_API[currencyCode] ||
-    !TALON_API[currencyCode].API_KEY ||
-    !TALON_API[currencyCode].API_URL
-  )
+  try {
+    const decodedString = JSON.parse(
+      `"${decodeURIComponent(process.env.TALON_ONE_API)}"`
+    )
+    const TALON_API = JSON.parse(decodedString) as TalonOneEnvConfig
+    if (
+      !TALON_API[currencyCode] ||
+      !TALON_API[currencyCode].API_KEY ||
+      !TALON_API[currencyCode].API_URL
+    )
+      return null
+
+    const client = getTalonOneApiClient({
+      apiKey: TALON_API[currencyCode].API_KEY,
+      basePath: TALON_API[currencyCode].API_URL
+    })
+
+    const updateCustomerProfile = (id: string, payload: NewCustomerProfile) => {
+      return client
+        .updateCustomerProfileV2(id, payload, {
+          runRuleEngine: true
+        })
+        .then(_projection)
+    }
+
+    const updateCustomerProfiles = (payload: any) => {
+      return client.updateCustomerProfilesV2(payload).then(_projection)
+    }
+
+    const updateCustomerSession = async (
+      id: string,
+      payload: Partial<NewCustomerSessionV2>
+    ) => {
+      const integrationRequest = new IntegrationRequest(payload)
+
+      integrationRequest.responseContent = [
+        IntegrationRequest.ResponseContentEnum.customerSession,
+        IntegrationRequest.ResponseContentEnum.loyalty
+      ]
+
+      return client
+        .updateCustomerSessionV2(id, integrationRequest)
+        .then(_projection)
+    }
+
+    const _projection = (data: { fromApi: any }) => {
+      if (data) data.fromApi = currencyCode
+
+      return data as any
+    }
+
+    return {
+      updateCustomerProfile,
+      updateCustomerProfiles,
+      updateCustomerSession
+    }
+  } catch (error) {
+    logger.error(error)
+
     return null
-
-  const client = getTalonOneApiClient({
-    apiKey: TALON_API[currencyCode].API_KEY,
-    basePath: TALON_API[currencyCode].API_URL
-  })
-
-  const updateCustomerProfile = (id: string, payload: NewCustomerProfile) => {
-    return client
-      .updateCustomerProfileV2(id, payload, {
-        runRuleEngine: true
-      })
-      .then(_projection)
-  }
-
-  const updateCustomerProfiles = (payload: any) => {
-    return client.updateCustomerProfilesV2(payload).then(_projection)
-  }
-
-  const updateCustomerSession = async (
-    id: string,
-    payload: Partial<NewCustomerSessionV2>
-  ) => {
-    const integrationRequest = new IntegrationRequest(payload)
-
-    integrationRequest.responseContent = [
-      IntegrationRequest.ResponseContentEnum.customerSession,
-      IntegrationRequest.ResponseContentEnum.loyalty
-    ]
-
-    return client
-      .updateCustomerSessionV2(id, integrationRequest)
-      .then(_projection)
-  }
-
-  const _projection = (data: { fromApi: any }) => {
-    if (data) data.fromApi = currencyCode
-
-    return data as any
-  }
-
-  return {
-    updateCustomerProfile,
-    updateCustomerProfiles,
-    updateCustomerSession
   }
 }
