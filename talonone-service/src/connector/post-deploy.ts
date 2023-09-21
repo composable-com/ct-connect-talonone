@@ -29,7 +29,6 @@ async function run(): Promise<void> {
   } catch (error) {
     process.stderr.write(`Post-deploy failed: ${error}`)
     process.exitCode = 1
-    throw error
   }
 }
 
