@@ -35,7 +35,7 @@ jest.mock('../utils', () => ({
 
 describe('createClient function', () => {
   afterEach(() => {
-    jest.clearAllMocks()
+    jest.resetAllMocks()
     jest.restoreAllMocks()
   })
 

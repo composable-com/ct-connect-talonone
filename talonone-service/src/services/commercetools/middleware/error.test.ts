@@ -9,8 +9,8 @@ describe('errorMiddleware', () => {
   let next: NextFunction
 
   afterEach(() => {
-    jest.clearAllMocks()
     jest.resetAllMocks()
+    jest.restoreAllMocks()
   })
 
   beforeEach(() => {

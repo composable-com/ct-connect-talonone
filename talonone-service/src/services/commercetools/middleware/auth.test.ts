@@ -20,7 +20,7 @@ jest.mock('../utils', () => ({
 
 describe('authMiddlewareOptions configuration', () => {
   afterEach(() => {
-    jest.clearAllMocks()
+    jest.resetAllMocks()
     jest.restoreAllMocks()
   })
 

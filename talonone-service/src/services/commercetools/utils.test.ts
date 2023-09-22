@@ -7,8 +7,9 @@ jest
   .mockImplementation(jest.fn().mockReturnValue([]))
 
 describe('readConfiguration', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
+  afterEach(() => {
+    jest.resetAllMocks()
+    jest.restoreAllMocks()
   })
 
   // Mocked environment variables
@@ -22,12 +23,6 @@ describe('readConfiguration', () => {
 
   beforeEach(() => {
     process.env = {} // Reset environment variables
-  })
-
-  afterEach(() => {
-    jest.clearAllMocks()
-    jest.restoreAllMocks()
-    jest.resetAllMocks()
   })
 
   it('should read and return environment variables correctly', () => {

@@ -24,7 +24,7 @@ jest.mock('../utils', () => ({
 
 describe('createApiRoot function', () => {
   afterEach(() => {
-    jest.clearAllMocks()
+    jest.resetAllMocks()
     jest.restoreAllMocks()
   })
 

@@ -1,7 +1,5 @@
 import { httpMiddlewareOptions } from './http'
 
-jest.clearAllMocks()
-
 jest.mock('../utils', () => ({
   readConfiguration: jest.fn().mockImplementation(() => ({
     region: 'test-region'
@@ -10,8 +8,8 @@ jest.mock('../utils', () => ({
 
 describe('httpMiddlewareOptions configuration', () => {
   afterEach(() => {
-    jest.clearAllMocks()
     jest.resetAllMocks()
+    jest.restoreAllMocks()
   })
 
   it('should generate httpMiddlewareOptions with the correct host', () => {
