@@ -13,7 +13,9 @@
     "release": "standard-version",
     "test:ci": "jest --ci -i",
     "create-ct-types": "ts-node src/scripts/create-ct-types.ts",
+    "test": "jest --config jest.config.cjs",
     "test:local": "NODE_ENV=local jest --ci -i --setupFiles dotenv/config",
+    "test:coverage": "jest --config jest.config.cjs --coverage --collectCoverageFrom='src/**/*.{ts,jxs}'",
     "connector:post-deploy": "node build/connector/post-deploy.js",
     "connector:pre-undeploy": "node build/connector/pre-undeploy.js"
   },
@@ -23,6 +25,7 @@
     "@commercetools-backend/loggers": "^22.6.0",
     "@commercetools/platform-sdk": "^5.0.0",
     "@commercetools/sdk-client": "^3.0.0",
+    "@commercetools/sdk-client-v2": "^2.2.0",
     "@prisma/client": "^5.1.1",
     "cors": "^2.8.5",
     "date-fns": "^2.30.0",

@@ -1,0 +1,17 @@
+{
+  "allowParens": "avoid",
+  "bracketSpacing": true,
+  "trailingComma": "none",
+  "semi": false,
+  "singleQuote": true,
+  "parser": "typescript",
+  "printWidth": 80,
+  "overrides": [
+    {
+      "files": "*.json",
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
+}
