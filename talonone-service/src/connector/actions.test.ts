@@ -7,23 +7,30 @@ describe('createMyExtension', () => {
     jest.resetAllMocks()
     jest.restoreAllMocks()
   })
-  const applicationUrl = 'https://example.com'
 
+  let mockDeletefn: typeof jest.fn
+  let mockPostfn: typeof jest.fn
+  let mockApiRoot: ByProjectKeyRequestBuilder
+
+  const applicationUrl = 'https://example.com'
   const mockGetResponse = {
     body: {
       results: [{ version: 1 }]
     }
   }
-  const mockDeletefn = jest.fn().mockReturnThis()
-  const mockPostfn = jest.fn().mockReturnThis()
-  const mockApiRoot = {
-    extensions: jest.fn().mockReturnThis(),
-    get: jest.fn().mockReturnThis(),
-    withKey: jest.fn().mockReturnThis(),
-    delete: mockDeletefn,
-    post: mockPostfn,
-    execute: jest.fn().mockResolvedValue(mockGetResponse)
-  } as unknown as ByProjectKeyRequestBuilder
+
+  beforeEach(() => {
+    mockDeletefn = jest.fn().mockReturnThis()
+    mockPostfn = jest.fn().mockReturnThis()
+    mockApiRoot = {
+      extensions: jest.fn().mockReturnThis(),
+      get: jest.fn().mockReturnThis(),
+      withKey: jest.fn().mockReturnThis(),
+      delete: mockDeletefn,
+      post: mockPostfn,
+      execute: jest.fn().mockResolvedValue(mockGetResponse)
+    } as unknown as ByProjectKeyRequestBuilder
+  })
 
   it('should create an extension', async () => {
     await createMyExtension(mockApiRoot, applicationUrl)
@@ -59,22 +66,28 @@ describe('deleteMyExtension', () => {
     jest.resetAllMocks()
     jest.restoreAllMocks()
   })
+
+  let mockDeletefn: typeof jest.fn
+  let mockApiRootDelete: ByProjectKeyRequestBuilder
   const mockGetResponse = {
     body: {
       results: [{ version: 1 }]
     }
   }
-  const mockDeletefn = jest.fn().mockReturnThis()
-  const mockApiRoot = {
-    extensions: jest.fn().mockReturnThis(),
-    get: jest.fn().mockReturnThis(),
-    withKey: jest.fn().mockReturnThis(),
-    delete: mockDeletefn,
-    execute: jest.fn().mockResolvedValue(mockGetResponse)
-  } as unknown as ByProjectKeyRequestBuilder
+
+  beforeEach(() => {
+    mockDeletefn = jest.fn().mockReturnThis()
+    mockApiRootDelete = {
+      extensions: jest.fn().mockReturnThis(),
+      get: jest.fn().mockReturnThis(),
+      withKey: jest.fn().mockReturnThis(),
+      delete: mockDeletefn,
+      execute: jest.fn().mockResolvedValue(mockGetResponse)
+    } as unknown as ByProjectKeyRequestBuilder
+  })
 
   it('should delete the extension', async () => {
-    await deleteMyExtension(mockApiRoot)
+    await deleteMyExtension(mockApiRootDelete)
 
     expect(mockDeletefn).toHaveBeenCalledWith({
       queryArgs: {
@@ -90,27 +103,46 @@ describe('createType', () => {
     jest.restoreAllMocks()
   })
 
-  it('should create a custom type', async () => {
-    const key = 'myKey'
-    const typeDefinition = { info: 'myTypeDefinition' } as unknown as TypeDraft
-
-    const mockGetResponse = {
-      body: {
-        results: { types: [] }
-      }
+  let mockPostfn: typeof jest.fn
+  let mockApiRootCreate: ByProjectKeyRequestBuilder
+  let mockApiRootNoCreate: ByProjectKeyRequestBuilder
+  const mockGetResponse = {
+    body: {
+      results: { types: [] }
     }
-    const mockPostfn = jest.fn().mockReturnThis()
+  }
 
-    const mockApiRoot = {
+  const mockGetResponseNoCreate = {
+    body: {
+      results: ['typeExsist']
+    }
+  }
+
+  beforeEach(() => {
+    mockPostfn = jest.fn().mockReturnThis()
+    mockApiRootCreate = {
       types: jest.fn().mockReturnThis(),
       get: jest.fn().mockReturnThis(),
       withKey: jest.fn().mockReturnThis(),
       post: mockPostfn,
       execute: jest.fn().mockResolvedValue(mockGetResponse)
-    }
+    } as unknown as ByProjectKeyRequestBuilder
+
+    mockApiRootNoCreate = {
+      types: jest.fn().mockReturnThis(),
+      get: jest.fn().mockReturnThis(),
+      withKey: jest.fn().mockReturnThis(),
+      post: mockPostfn,
+      execute: jest.fn().mockResolvedValue(mockGetResponseNoCreate)
+    } as unknown as ByProjectKeyRequestBuilder
+  })
+
+  it('should create a custom type', async () => {
+    const key = 'myKey'
+    const typeDefinition = { info: 'myTypeDefinition' } as unknown as TypeDraft
 
     await createType(
-      mockApiRoot as unknown as ByProjectKeyRequestBuilder,
+      mockApiRootCreate as unknown as ByProjectKeyRequestBuilder,
       key,
       typeDefinition
     )
@@ -124,24 +156,8 @@ describe('createType', () => {
     const key = 'myKey'
     const typeDefinition = { info: 'myTypeDefinition' } as unknown as TypeDraft
 
-    const mockGetResponseNoCreate = {
-      body: {
-        results: ['typeExsist']
-      }
-    }
-
-    const mockPostfn = jest.fn().mockReturnThis()
-
-    const mockApiRoot = {
-      types: jest.fn().mockReturnThis(),
-      get: jest.fn().mockReturnThis(),
-      withKey: jest.fn().mockReturnThis(),
-      post: mockPostfn,
-      execute: jest.fn().mockResolvedValue(mockGetResponseNoCreate)
-    }
-
     await createType(
-      mockApiRoot as unknown as ByProjectKeyRequestBuilder,
+      mockApiRootNoCreate as unknown as ByProjectKeyRequestBuilder,
       key,
       typeDefinition
     )
