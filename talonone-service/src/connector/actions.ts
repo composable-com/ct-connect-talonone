@@ -42,8 +42,8 @@ export async function createMyExtension(
           url: applicationUrl
         },
         triggers: [
-          { "resourceTypeId": "cart", "actions": ["Create", "Update"] },
-          { "resourceTypeId": "order", "actions": ["Create", "Update"] },
+          { resourceTypeId: 'cart', actions: ['Create', 'Update'] },
+          { resourceTypeId: 'order', actions: ['Create', 'Update'] }
         ]
       }
     })
@@ -90,14 +90,12 @@ export async function createType(
     .types()
     .get({
       queryArgs: {
-        where: `key = "${key}"`, 
+        where: `key = "${key}"`
       }
     })
     .execute()
 
-  if (types.length > 0) {
-    return;
-  }
+  if (types.length > 0) return
 
   await apiRoot
     .types()

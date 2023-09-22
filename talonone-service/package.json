@@ -5,6 +5,7 @@
   "description": "Talon One API Extension for Commercetools",
   "scripts": {
     "lint": "eslint src/* --ext .ts --fix",
+    "gcp-build": "tsc",
     "service": "nodemon",
     "start": "node build/index.js",
     "start:dev": "concurrently -k \"tsc --watch\" \"nodemon -q build/index.js\"",

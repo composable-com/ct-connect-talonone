@@ -1,7 +1,7 @@
 import { Cart, CustomLineItem } from '@commercetools/platform-sdk'
 import { nameToSlug } from '../../../utils'
 
-
+const CTP_PRODUCT_LOCALE = process.env.CTP_PRODUCT_LOCALE || 'en-US';
 export interface SetDiscountParams {
   name: string
   value: number
@@ -49,7 +49,7 @@ const setDiscountHandler = (
   return {
     action: 'addCustomLineItem',
     custom,
-    name: { 'en-US': name }, // we need to handle localization
+    name: { [CTP_PRODUCT_LOCALE]: name }, // we need to handle localization
     money: {
       centAmount: value * -1,
       type: 'centPrecision',

@@ -1,6 +1,5 @@
 import { Server as HttpServer } from 'http'
 import express from 'express'
-import cors from 'cors'
 import debug from 'debug'
 
 import { applyRoutes } from './router'
@@ -36,7 +35,6 @@ class Server implements Log {
 
   async #config() {
     await getProject()
-    this.#app.use(cors())
     this.#app.use(express.json())
     this.#app.use(express.urlencoded({ extended: false }))
     this.#app.use(createAccessLoggerMiddleware())
@@ -47,17 +45,11 @@ class Server implements Log {
         res: express.Response,
         next: express.NextFunction
       ) => {
-        res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE')
-        res.header('Access-Control-Allow-Origin', '*')
-        res.header(
-          'Access-Control-Allow-Headers',
-          'Authorization, Content-Type'
-        )
-
         const action = req.body.resource as
           | CartReference
           | OrderReference
           | CustomerReference
+
         if (action.typeId === 'customer')
           // TODO: Handle customer events
           return res.status(200).json({ actions: [] })
