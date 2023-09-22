@@ -25,14 +25,6 @@
       "error",
       "as-needed"
     ],
-    "import/extensions": [
-      2,
-      {
-        "ts": "never",
-        "js": "always",
-        "json": "always"
-      }
-    ],
     "import/no-extraneous-dependencies": [
       "error",
       {
