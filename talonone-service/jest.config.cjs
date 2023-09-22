@@ -4,4 +4,10 @@ module.exports = {
   testMatch: ['**/tests/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[tj]s?(x)'],
   preset: 'ts-jest',
   testEnvironment: 'node',
-};
+  collectCoverageFrom: [
+    'src/**/*.{ts,jxs}',
+    '!**/node_modules/**',
+    '!src/services/commercetools/validators/**',
+    '!src/utils/**'
+  ]
+}
