@@ -1,5 +1,9 @@
+import { describe, expect, test, jest } from '@jest/globals';
 import { EffectHandlers } from '../types'
 import getCartEffectHandlers from './index'
+import getDiscountApplied from './setDiscount'
+
+jest.mock('./setDiscount')
 
 describe('getCartEffectHandlers', () => {
   let currencyCode: string
@@ -16,13 +20,14 @@ describe('getCartEffectHandlers', () => {
   })
 
   it('should return an object with the setDiscount effect handler', () => {
+    (getDiscountApplied as jest.Mock).mockReturnValue(null)
+
     const effectHandlers: EffectHandlers = getCartEffectHandlers(
       currencyCode,
       taxCategoryId
     )
 
-    expect(effectHandlers).toEqual({
-      setDiscount: expect.any(Function)
-    })
+    expect(effectHandlers).toHaveProperty('setDiscount')
+    expect(effectHandlers.setDiscount({})).toBeNull()
   })
 })
