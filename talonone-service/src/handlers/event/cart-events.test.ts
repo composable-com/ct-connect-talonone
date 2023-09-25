@@ -15,14 +15,8 @@ describe('cartEventsHandler', () => {
   let mockResource: CartReference
   let mockUpdateCustomerSession: typeof jest.fn
 
-  afterEach(() => {
-    jest.resetAllMocks()
-    jest.restoreAllMocks()
-  })
-
   beforeEach(() => {
     // Reset mocks
-    jest.clearAllMocks()
     jest.resetAllMocks()
     jest.restoreAllMocks()
     ;(getDiscountApplied as jest.Mock).mockReturnValue(null)

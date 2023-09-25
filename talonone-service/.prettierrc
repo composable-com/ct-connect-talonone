@@ -6,6 +6,7 @@
   "singleQuote": true,
   "parser": "typescript",
   "printWidth": 80,
+  "arrowParens": "avoid",
   "overrides": [
     {
       "files": "*.json",
