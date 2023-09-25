@@ -15,7 +15,7 @@
     "create-ct-types": "ts-node src/scripts/create-ct-types.ts",
     "test": "jest --config jest.config.cjs",
     "test:local": "NODE_ENV=local jest --ci -i --setupFiles dotenv/config",
-    "test:coverage": "jest --config jest.config.cjs --coverage --collectCoverageFrom='src/**/*.{ts,jxs}'",
+    "test:coverage": "jest --config jest.config.cjs --coverage --collectCoverageFrom='src/**/*.{ts,jsx}'",
     "connector:post-deploy": "node build/connector/post-deploy.js",
     "connector:pre-undeploy": "node build/connector/pre-undeploy.js"
   },
@@ -40,14 +40,9 @@
     "zod": "^3.22.2"
   },
   "nodemonConfig": {
-    "watch": [
-      ".env",
-      "src"
-    ],
+    "watch": [".env", "src"],
     "ext": "ts",
-    "ignore": [
-      "src/**/*.test.ts"
-    ],
+    "ignore": ["src/**/*.test.ts"],
     "exec": "DEBUG=App:* npx ts-node -r dotenv/config ./src/index"
   },
   "devDependencies": {

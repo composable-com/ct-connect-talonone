@@ -9,7 +9,7 @@ async function preUndeploy(): Promise<void> {
   await deleteMyExtension(apiRoot)
 }
 
-async function run(): Promise<void> {
+export async function run(): Promise<void> {
   try {
     await preUndeploy()
   } catch (error) {
