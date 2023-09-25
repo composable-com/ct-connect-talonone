@@ -9,5 +9,6 @@ module.exports = {
     '!**/node_modules/**',
     '!src/services/commercetools/validators/**',
     '!src/utils/**'
-  ]
+  ],
+  setupFiles: ["./jest.setup.js"],
 }
