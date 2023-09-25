@@ -6,14 +6,14 @@ import getOrderEffectHandlers from '../../handlers/effects/order'
 import { getOrderActions } from '../actions'
 import { logger } from '../../services/utils/logger'
 
-enum OrderState {
+export enum OrderState {
   Open = 'Open',
   Confirmed = 'Confirmed',
   Complete = 'Complete',
   Cancelled = 'Cancelled'
 }
 
-const getState = (orderState: string) => {
+export const getState = (orderState: string) => {
   switch (orderState) {
     case OrderState.Open:
     case OrderState.Complete:

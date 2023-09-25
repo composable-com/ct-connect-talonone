@@ -15,7 +15,7 @@
     "create-ct-types": "ts-node src/scripts/create-ct-types.ts",
     "test": "jest --config jest.config.cjs",
     "test:local": "NODE_ENV=local jest --ci -i --setupFiles dotenv/config",
-    "test:coverage": "jest --config jest.config.cjs --coverage",
+    "test:coverage": "jest --config jest.config.cjs --coverage --collectCoverageFrom='src/**/*.{ts,jsx}'",
     "connector:post-deploy": "node build/connector/post-deploy.js",
     "connector:pre-undeploy": "node build/connector/pre-undeploy.js"
   },
