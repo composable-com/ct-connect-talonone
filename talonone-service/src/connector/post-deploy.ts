@@ -22,7 +22,7 @@ async function postDeploy(properties: Map<string, unknown>): Promise<void> {
   await createType(apiRoot, lineItemMetadataType.key, lineItemMetadataType)
 }
 
-async function run(): Promise<void> {
+export async function run(): Promise<void> {
   try {
     const properties = new Map(Object.entries(process.env))
     await postDeploy(properties)
