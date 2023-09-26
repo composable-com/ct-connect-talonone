@@ -1,6 +1,10 @@
 # commercetools API Extension: Talon.One Integration
 
-This commercetools API Extension integrates Talon.One, providing support for both Loyalty Points and Cart-Level Discounts. The following README provides detailed instructions on how to install, configure, and verify the integration of this open-source project.
+The Talon.One commercetools connector was created by [Orium](https://orium.com/), and provides the following features:
+- Ability to track a customer’s loyalty points in commercetools as orders are placed or canceled
+- Ability to automatically apply a Talon.One cart-level discount to a cart as items are updated in a cart (API extension implementation)
+
+The following README provides detailed instructions on how to install, configure, and verify the integration of this open-source project.
 
 ## Current State
 
